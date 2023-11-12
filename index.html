@@ -20,6 +20,7 @@
 
   <title>8-bit Nintendo Science</title>
   <link rel="stylesheet" href="assets/css/styles.css?{{ "now" | date: "%s" }}">
+  <link rel="stylesheet" href="assets/css/tablesort.css?{{ "now" | date: "%s" }}">
 </head>
 <body>
   <div class="container">
@@ -37,19 +38,19 @@
     </section>
 
     <section class="the-list">
-      <table class="ranking" border="1">
+      <table id="ranking" border="1">
         <thead>
           <tr>
-            <th>#</th>
+            <th data-sort-method='number' data-sort-default>#</th>
             <th>Game</th>
-            <th>Episode</th>
-            <th>Timestamp</th>
+            <th data-sort-method='number'>Episode</th>
+            <th data-sort-method='none'>Timestamp</th>
           </tr>
         </thead>
         <tbody>
           {% for item in site.data.list %}
           <tr>
-            <td>
+            <td data-sort="{{ forloop.index }}">
               {% if forloop.index == 1 %}
                 <img class="medal" src="assets/images/gold.gif">
               {% elsif forloop.index == 2 %}
@@ -61,7 +62,7 @@
               {% endif %}
             </td>
             <td>{{ item.game }}</td>
-            <td>
+            <td data-sort="{{ item.ep }}">
               <a href="https://www.youtube.com/watch?v={{ item.ytid }}">
                 <img class="thumbnail" src="https://i.ytimg.com/vi/{{ item.ytid }}/mqdefault.jpg">
                 {{ item.ep }}
@@ -91,5 +92,10 @@
       </p>
     </section>
   </div>
+  <script type="text/javascript" src="assets/js/tablesort.min.js"></script>
+  <script type="text/javascript" src="assets/js/tablesort.number.min.js"></script>
+  <script type="text/javascript">
+    new Tablesort(document.getElementById('ranking'));
+  </script>
 </body>
 </html>
