@@ -1,0 +1,94 @@
+---
+---
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/assets/favicon/site.webmanifest">
+  <link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#0cff00">
+  <link rel="shortcut icon" href="/assets/favicon/favicon.ico">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-config" content="/assets/favicon/browserconfig.xml">
+  <meta name="theme-color" content="#ffffff">
+
+
+  <title>8-bit Nintendo Science</title>
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <img class="text3d" src="/assets/images/science.gif">
+    <section class="header">
+      <div class="left">
+        <img src="/assets/images/nes.gif">
+      </div>
+      <div class="title">
+        <h1>An Exhaustive and Definitive Ranking of All Nintendo Entertainment System Games Released in North America, Where We Determine Which Games Are the Absolute Pinnacle of 8-Bit Excellence and Which Ones Make You Question Life Choices, Ranked from Best to Worst</h1>
+      </div>
+      <div class="right">
+        <img src="/assets/images/dancing-baby.gif">
+      </div>
+    </section>
+
+    <section class="the-list">
+      <table class="ranking" border="1">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Game</th>
+            <th>Episode</th>
+            <th>Timestamp</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in site.data.list %}
+          <tr>
+            <td>
+              {% if forloop.index == 1 %}
+                <img class="medal" src="/assets/images/gold.gif">
+              {% elsif forloop.index == 2 %}
+                <img class="medal" src="/assets/images/silver.gif">
+              {% elsif forloop.index == 3 %}
+                <img class="medal" src="/assets/images/bronze.gif">
+              {% else %}
+                {{ forloop.index }}
+              {% endif %}
+            </td>
+            <td>{{ item.game }}</td>
+            <td>
+              <a href="https://www.youtube.com/watch?v={{ item.ytid }}">
+                {{ item.ep }}  
+              </a>
+            </td>
+            <td>
+              <a href="https://www.youtube.com/watch?v={{ item.ytid }}&t={{ item.seconds }}s">
+                {{ item.seconds | date: "%H:%M:%S"}}
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+    <img class="divider" src="/assets/images/electricbar.gif">
+
+    <section class="about">
+      <h2>The list is 
+        <img src="/assets/images/under-construction.gif" width="200">
+      </h2>
+      <p>
+        This page is maintained by fans and is updated as Scientist Jeff Gerstmann proceeds in his work of <code>#BuildingTheList</code>. You can watch science in action live on <a href="https://www.twitch.tv/jeffgerstmann">twitch.tv/jeffgerstmann</a> or check out previous episodes on <a href="https://www.youtube.com/playlist?list=PLDKeuvgV0sxZ_xs4zUvQcMEV-LTjSf-Ok">youtube.com/TheJeffGerstmannShow</a>.
+      </p>
+      <p>If any information is missing or incorrect, consider submiting a fix to our GitHub repository.
+      </p>
+    </section>
+  </div>
+</body>
+</html>

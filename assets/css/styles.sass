@@ -1,0 +1,58 @@
+---
+---
+$title-font: "Comic Sans MS", sans-serif
+$default-font: "Times New Roman", serif
+$title-shadow: red 2px 4px
+
+html
+  background: url("/assets/images/batsbg.gif") black
+  color: white
+  font-family: $default-font
+  image-rendering: pixelated
+
+a
+  color: dodgerblue
+a:visited
+  color: slateblue
+
+.container
+  max-width: 90ch
+  margin: auto
+
+  img.text3d
+    width: 750px
+    margin: auto
+
+.header
+  display: flex
+  flex-direction: row
+  align-items: center
+  gap: 2rem
+
+  h1
+    text-align: justify
+    font-family: $title-font
+    font-size: 2rem
+    color: yellow
+    animation: 1s infinite alternate glow
+
+.the-list
+  table.ranking
+    width: 100%
+    background: black
+    margin: 2rem auto
+    td,th
+      padding: 1ch
+
+  img.medal
+    width: 4ch
+
+img.divider
+  width: 100%
+
+
+@keyframes glow
+  from
+    text-shadow: $title-shadow 8px
+  to
+    text-shadow: $title-shadow 1px
