@@ -63,15 +63,21 @@
             </td>
             <td>{{ item.game }}</td>
             <td data-sort="{{ item.ep }}">
-              <a href="https://www.youtube.com/watch?v={{ item.ytid }}">
-                <img class="thumbnail" src="https://i.ytimg.com/vi/{{ item.ytid }}/mqdefault.jpg">
+              {% if item.ytid %}
+                <a href="https://www.youtube.com/watch?v={{ item.ytid }}">
+                  <img class="thumbnail" src="https://i.ytimg.com/vi/{{ item.ytid }}/mqdefault.jpg">
+                  {{ item.ep }}
+                </a>
+              {% else %}
                 {{ item.ep }}
-              </a>
+              {% endif %}
             </td>
             <td>
-              <a href="https://www.youtube.com/watch?v={{ item.ytid }}&t={{ item.seconds }}s">
-                {{ item.seconds | date: "%H:%M:%S"}}
-              </a>
+              {% if item.ytid and item.seconds %}
+                <a href="https://www.youtube.com/watch?v={{ item.ytid }}&t={{ item.seconds }}s">
+                  {{ item.seconds | date: "%H:%M:%S"}}
+                </a>
+              {% endif %}
             </td>
           </tr>
           {% endfor %}
