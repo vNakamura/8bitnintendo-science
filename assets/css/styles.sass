@@ -4,11 +4,12 @@ $title-font: "Comic Sans MS", sans-serif
 $default-font: "Times New Roman", serif
 $title-shadow: red 2px 4px
 
-html
+body
   background: url("../images/batsbg.gif") black
   color: white
   font-family: $default-font
   image-rendering: pixelated
+  padding: 2rem
 
 a
   color: dodgerblue
@@ -16,11 +17,12 @@ a:visited
   color: slateblue
 
 .container
-  max-width: 90ch
+  max-width: 120ch
   margin: auto
 
   img.text3d
-    width: 750px
+    width: 478px
+    display: block
     margin: auto
 
 .header
@@ -37,27 +39,54 @@ a:visited
     animation: 1s infinite alternate glow
 
 .the-list
+  position: relative
+
   table#ranking
     width: 100%
     background: black
     margin: 2rem auto
-    
-    td,th
-      padding: 1ch
 
     thead
       position: sticky
       top: 0
       background: black
 
+    col.rank
+      width: 8ch
+    col.dev
+      width: 20ch
+    col.license
+      width: 12ch
+    
+    td,th
+      padding: 1ch
+
+    td.rank,td.license
+      text-align: center
+
+    td.dev > ul
+      margin: 0
+      padding: 0 0 0 2ch
+      list-style-type: circle
+
   img.medal
     width: 4ch
+
+  img.seal
+    width: 6ch
+    vertical-align: middle
 
   img.thumbnail
     height: 3em
     border: none
     vertical-align: middle
     margin-right: 1ch
+
+  img.garfield
+    pointer-events: none
+    position: absolute
+    bottom: 20px
+    left: calc(100% - 18px)
 
 img.divider
   width: 100%

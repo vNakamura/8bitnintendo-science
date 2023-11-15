@@ -24,7 +24,7 @@
 </head>
 <body>
   <div class="container">
-    <img class="text3d" src="assets/images/science.gif">
+    <img class="text3d" src="assets/images/science_crop.gif">
     <section class="header">
       <div class="left">
         <img src="assets/images/nes.gif">
@@ -39,18 +39,46 @@
 
     <section class="the-list">
       <table id="ranking" border="1">
+        <colgroup>
+          <col class="rank">
+          <col class="title">
+          <col class="dev">
+          <col class="license">
+          <col class="ep">
+          <col class="timestamp">
+        </colgroup>
         <thead>
           <tr>
             <th data-sort-method='number' data-sort-default>#</th>
             <th>Game</th>
+            <th>Developer(s)</th>
+            <th><img class="seal" src="assets/images/licensed.png"></th>
             <th data-sort-method='number'>Episode</th>
             <th data-sort-method='none'>Timestamp</th>
           </tr>
         </thead>
         <tbody>
           {% for item in site.data.list %}
+          {% assign licensed = true %}
+          {% assign wiki_data = site.data.licensed_games | find: "title", item.game %}
+          {% unless wiki_data %}
+            {% assign wiki_data = site.data.unlicensed_games | find: "title", item.game %}
+            {% if wiki_data %}{% assign licensed = false %}{% endif %}
+          {% endunless %}
+          {% unless wiki_data %}
+            {% assign wiki_data = site.data.licensed_games | find_exp: "game", "game.title contains item.game" %}
+          {% endunless %}
+          {% unless wiki_data %}
+            {% assign wiki_data = site.data.unlicensed_games | find_exp: "game", "game.title contains item.game" %}
+            {% if wiki_data %}{% assign licensed = false %}{% endif %}
+          {% endunless %}
+
+          {% assign dev = wiki_data.developer %}
+          {% unless dev %}
+            {% assign dev = wiki_data.publisher %}
+          {% endunless %}
           <tr>
-            <td data-sort="{{ forloop.index }}">
+            <td class="rank" data-sort="{{ forloop.index }}">
               {% if forloop.index == 1 %}
                 <img class="medal" src="assets/images/gold.gif">
               {% elsif forloop.index == 2 %}
@@ -61,18 +89,35 @@
                 {{ forloop.index }}
               {% endif %}
             </td>
-            <td>{{ item.game }}</td>
-            <td data-sort="{{ item.ep }}">
+            <td class="title">
+              {{ item.game }}
+            </td>
+            <td class="dev">
+              {% if dev %}
+                {% assign companies = dev | newline_to_br | split: "<br />" %}
+                <ul>
+                  {% for company in companies %}
+                    <li>{{company}}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </td>
+            <td class="license" data-sort="{{ licensed }}">
+              {% if licensed %}
+                <img class="seal" src="assets/images/licensed.png">
+              {% endif %}
+            </td>
+            <td class="ep" data-sort="{{ item.ep }}">
               {% if item.ytid %}
                 <a href="https://www.youtube.com/watch?v={{ item.ytid }}">
-                  <img class="thumbnail" src="https://i.ytimg.com/vi/{{ item.ytid }}/mqdefault.jpg">
+                  <img class="thumbnail" src="https://i.ytimg.com/vi/{{ item.ytid }}/default.jpg">
                   {{ item.ep }}
                 </a>
               {% else %}
                 {{ item.ep }}
               {% endif %}
             </td>
-            <td>
+            <td class="timestamp">
               {% if item.ytid and item.seconds %}
                 <a href="https://www.youtube.com/watch?v={{ item.ytid }}&t={{ item.seconds }}s">
                   {{ item.seconds | date: "%H:%M:%S"}}
@@ -83,6 +128,7 @@
           {% endfor %}
         </tbody>
       </table>
+      <img class="garfield" src="assets/images/garfield.png">
     </section>
 
     <img class="divider" src="assets/images/electricbar.gif">

@@ -4,13 +4,13 @@ th[role=columnheader]:not([data-sort-method="none"]) {
 
 th[role=columnheader]:not([data-sort-method="none"]):after {
 	content: '';
-	float: right;
-	margin-top: 7px;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 0 0 1ch;
 	border-width: 0 4px 4px;
 	border-style: solid;
 	border-color: #CCCCCC transparent;
-	visibility: hidden;
-	opacity: 0;
+	opacity: 0.3;
 	-ms-user-select: none;
 	-webkit-user-select: none;
 	-moz-user-select: none;
@@ -24,7 +24,7 @@ th[aria-sort=ascending]:not([data-sort-method="none"]):after {
 
 th[aria-sort]:not([data-sort-method="none"]):after {
 	visibility: visible;
-	opacity: 0.4;
+	opacity: 0.8;
 }
 
 th[role=columnheader]:not([data-sort-method="none"]):hover:after {
