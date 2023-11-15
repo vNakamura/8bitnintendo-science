@@ -60,16 +60,16 @@
         <tbody>
           {% for item in site.data.list %}
           {% assign licensed = true %}
-          {% assign wiki_data = site.data.licensed_games | find: "title", item.game %}
+          {% assign wiki_data = site.data.licensed_games | where: "title", item.game | first %}
           {% unless wiki_data %}
-            {% assign wiki_data = site.data.unlicensed_games | find: "title", item.game %}
+            {% assign wiki_data = site.data.unlicensed_games | where: "title", item.game | first %}
             {% if wiki_data %}{% assign licensed = false %}{% endif %}
           {% endunless %}
           {% unless wiki_data %}
-            {% assign wiki_data = site.data.licensed_games | find_exp: "game", "game.title contains item.game" %}
+            {% assign wiki_data = site.data.licensed_games | where_exp: "game", "game.title contains item.game" | first %}
           {% endunless %}
           {% unless wiki_data %}
-            {% assign wiki_data = site.data.unlicensed_games | find_exp: "game", "game.title contains item.game" %}
+            {% assign wiki_data = site.data.unlicensed_games | where_exp: "game", "game.title contains item.game" | first %}
             {% if wiki_data %}{% assign licensed = false %}{% endif %}
           {% endunless %}
 
@@ -150,9 +150,4 @@
     new Tablesort(document.getElementById('ranking'));
   </script>
 </body>
-<!-- 
-  {{ site.data.licensed_games | find: "title", "Qix" }}
-  {{ site.data.licensed_games | inspect }}
- -->
-  }
 </html>
