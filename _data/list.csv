@@ -1,4 +1,4 @@
-game,ep,ytid,seconds
+game,ep,ytid,seconds,screenshot
 Super Mario Bros.,12,A_PW9Xnkl-k,304
 Rygar,4,i7GjD6TChrE,560
 River City Ransom,1,46AjLP33meU,1160
@@ -11,8 +11,8 @@ Jackal,7,WKvoWrbR5-g,5886
 R.C. Pro-Am,5,yD6oy052448,560
 Tecmo Bowl,9,Lt2ixSMYz_g,205
 Kickle Cubicle,2,AjYgfbIITwI,10564
-Kung Fu,1,46AjLP33meU,9950
-Commando,8,j800-eNkR6I,283
+Kung Fu,1,46AjLP33meU,9950,"Kung Fu (Japan, USA) (En).png"
+Commando,8,j800-eNkR6I,283,Commando (USA).png
 Tecmo World Wrestling,12,A_PW9Xnkl-k,9565
 Balloon Fight,14,7hA17-w9HXw,129
 Trojan,2,AjYgfbIITwI,660
@@ -23,7 +23,7 @@ Air Fortress,3,g9Qa6fPIOxo,6566
 Zanac,6,MXOf7JrEV5c,5704
 Gradius,13,L-2bfl94IGg,267
 Kabuki: Quantum Fighter,5,yD6oy052448,1898
-M.U.S.C.L.E. Tag Team Match,1,46AjLP33meU,7020
+M.U.S.C.L.E. Tag Team Match,1,46AjLP33meU,7020,"M.U.S.C.L.E. - Tag Team Match (USA).png"
 Low G Man: The Low Gravity Man,1,46AjLP33meU,4505
 Life Force,4,i7GjD6TChrE,3607
 Batman: The Video Game,6,MXOf7JrEV5c,4617
@@ -35,13 +35,13 @@ Astyanax,6,MXOf7JrEV5c,350
 Rescue: The Embassy Mission,5,yD6oy052448,3966
 Xexyz,10,2i22nCcC3Uc,7509
 Archon,7,WKvoWrbR5-g,8112
-Section Z,3,g9Qa6fPIOxo,5594
+Section Z,3,g9Qa6fPIOxo,5594,Section-Z (USA).png
 3-D WorldRunner,5,yD6oy052448,7036
 Jackie Chan's Action Kung Fu,3,g9Qa6fPIOxo,8265
-The Bugs Bunny Crazy Castle,9,Lt2ixSMYz_g,10025
+The Bugs Bunny Crazy Castle,9,Lt2ixSMYz_g,10025,"Bugs Bunny Crazy Castle, The (USA).png"
 Legendary Wings,8,j800-eNkR6I,3100
 Journey to Silius,10,2i22nCcC3Uc,4282
-Ice Climber,11,pvS28XD9VTU,6210
+Ice Climber,11,pvS28XD9VTU,6210,
 Bases Loaded,14,7hA17-w9HXw,8440
 Wrecking Crew,1,46AjLP33meU,8035
 Dr. Chaos,4,i7GjD6TChrE,10330
@@ -52,11 +52,11 @@ California Games,4,i7GjD6TChrE,6994
 Little Nemo: The Dream Master,5,yD6oy052448,8076
 Pirates!,8,j800-eNkR6I,5740
 Tiny Toon Adventures,12,A_PW9Xnkl-k,4318
-The Little Mermaid,9,Lt2ixSMYz_g,6976
+The Little Mermaid,9,Lt2ixSMYz_g,6976,"Little Mermaid, The (USA).png"
 Bubble Bobble,13,L-2bfl94IGg,6470
 Sqoon,13,L-2bfl94IGg,8296
 Galaga: Demons of Death,14,7hA17-w9HXw,2779
-Spy vs. Spy,2,AjYgfbIITwI,9345
+Spy vs. Spy,2,AjYgfbIITwI,9345,Spy vs Spy (USA).png
 Donkey Kong,2,AjYgfbIITwI,4503
 BurgerTime,2,AjYgfbIITwI,3507
 Kid Niki: Radical Ninja,1,46AjLP33meU,6312
@@ -65,7 +65,7 @@ Lunar Pool,1,46AjLP33meU,5585
 Lode Runner,2,AjYgfbIITwI,8357
 Ikari Warriors,3,g9Qa6fPIOxo,668
 Rush'n Attack,9,Lt2ixSMYz_g,7899
-Qix,6,MXOf7JrEV5c,8905
+Qix,6,MXOf7JrEV5c,8905,QIX (USA).png
 Anticipation,12,A_PW9Xnkl-k,5370
 Spy Hunter,4,i7GjD6TChrE,9530
 Baseball,7,WKvoWrbR5-g,10236
@@ -80,7 +80,7 @@ Captain Skyhawk,1,46AjLP33meU,3507
 Mach Rider,9,Lt2ixSMYz_g,3393
 Skate or Die,11,pvS28XD9VTU,430
 Double Dare,8,j800-eNkR6I,8115
-The Karate Kid,9,Lt2ixSMYz_g,5784
+The Karate Kid,9,Lt2ixSMYz_g,5784,"Karate Kid, The (USA).png"
 Krusty's Fun House,10,2i22nCcC3Uc,1664
 Marble Madness,10,2i22nCcC3Uc,3222
 Dick Tracy,12,A_PW9Xnkl-k,8685
@@ -90,7 +90,7 @@ Yo! Noid,13,L-2bfl94IGg,5609
 Bad Dudes,14,7hA17-w9HXw,3418
 RoboCop,8,j800-eNkR6I,4522
 Werewolf: The Last Warrior,13,L-2bfl94IGg,7022
-The Three Stooges,5,yD6oy052448,9483
+The Three Stooges,5,yD6oy052448,9483,"Three Stooges, The (USA).png"
 Classic Concentration,2,AjYgfbIITwI,7453
 Renegade,2,AjYgfbIITwI,5400
 Pinball Quest,14,7hA17-w9HXw,6690
@@ -98,7 +98,7 @@ Castlequest,10,2i22nCcC3Uc,9196
 Caveman Games,14,7hA17-w9HXw,1440
 Fisher-Price: Firehouse Rescue,3,g9Qa6fPIOxo,9284
 Toobin',8,j800-eNkR6I,10063
-WWF WrestleMania,8,j800-eNkR6I,2216
+WWF WrestleMania,8,j800-eNkR6I,2216,WWF Wrestlemania (USA).png
 Xenophobe,8,j800-eNkR6I,7150
 Deadly Towers,5,yD6oy052448,5005
 Snoopy's Silly Sports Spectacular!,12,A_PW9Xnkl-k,7720

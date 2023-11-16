@@ -59,6 +59,7 @@
         </thead>
         <tbody>
           {% for item in site.data.list %}
+          {% assign screenshot = nil %}
           {% assign licensed = true %}
           {% assign wiki_data = site.data.licensed_games | where: "title", item.game | first %}
           {% unless wiki_data %}
@@ -77,6 +78,16 @@
           {% unless dev %}
             {% assign dev = wiki_data.publisher %}
           {% endunless %}
+
+          {% if item.screenshot %}
+            {% assign screenshot = item.screenshot %}
+          {% else %}
+            {% assign search = item.game | replace: ":", " -" %}
+            {% assign libretro_file = site.data.libretro | where_exp: "i", "i.filename contains search" | first %}
+            {% if libretro_file %}
+              {% assign screenshot = libretro_file.filename %}
+            {% endif %}
+          {% endif %}
           <tr>
             <td class="rank" data-sort="{{ forloop.index }}">
               {% if forloop.index == 1 %}
@@ -90,6 +101,11 @@
               {% endif %}
             </td>
             <td class="title">
+              {% if screenshot %}
+                <img class="title-screen"  loading="lazy"
+                  src="https://wsrv.nl/?url=thumbnailpacks.libretro.com/Nintendo - Nintendo Entertainment System/Named_Titles/{{ screenshot }}"
+                >
+              {% endif %}
               {{ item.game }}
             </td>
             <td class="dev">
@@ -110,7 +126,9 @@
             <td class="ep" data-sort="{{ item.ep }}">
               {% if item.ytid %}
                 <a href="https://www.youtube.com/watch?v={{ item.ytid }}">
-                  <img class="thumbnail" src="https://i.ytimg.com/vi/{{ item.ytid }}/default.jpg">
+                  <img class="thumbnail"  loading="lazy"
+                    src="https://wsrv.nl/?url=i.ytimg.com/vi/{{ item.ytid }}/default.jpg"
+                  >
                   {{ item.ep }}
                 </a>
               {% else %}
