@@ -58,19 +58,31 @@ a:visited
       width: 8ch
     col.dev
       width: 20ch
-    col.license
-      width: 12ch
     
     td,th
       padding: 1ch
+    th
+      white-space: nowrap
 
     td.rank,td.license
       text-align: center
+
+    td .title-wrapper
+      display: flex
+      align-items: center
+
+    td.license
+      padding: 0
+    th.license
+      padding: 0 1ch
 
     td.dev > ul
       margin: 0
       padding: 0 0 0 2ch
       list-style-type: circle
+
+    td.ep > a
+      white-space: nowrap
 
   img.medal
     width: 4ch
@@ -78,6 +90,8 @@ a:visited
   img.seal
     width: 6ch
     vertical-align: middle
+  th > img.seal
+    width: 4ch
 
   img.thumbnail, img.title-screen
     height: 48px

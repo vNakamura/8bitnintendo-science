@@ -52,9 +52,9 @@
             <th data-sort-method='number' data-sort-default>#</th>
             <th>Game</th>
             <th>Developer(s)</th>
-            <th><img class="seal" src="assets/images/licensed.png"></th>
-            <th data-sort-method='number'>Episode</th>
-            <th data-sort-method='none'>Timestamp</th>
+            <th class="license" data-sort-method='dotsep'><img class="seal" src="assets/images/licensed.png"></th>
+            <th data-sort-method='dotsep'>Episode</th>
+            <th data-sort-method='dotsep'>Time</th>
           </tr>
         </thead>
         <tbody>
@@ -101,12 +101,16 @@
               {% endif %}
             </td>
             <td class="title">
-              {% if screenshot %}
-                <img class="title-screen"  loading="lazy"
-                  src="https://wsrv.nl/?url=thumbnailpacks.libretro.com/Nintendo - Nintendo Entertainment System/Named_Titles/{{ screenshot }}"
-                >
-              {% endif %}
-              {{ item.game }}
+              <div class="title-wrapper">
+                {% if screenshot %}
+                  <img class="title-screen"  loading="lazy"
+                    src="https://wsrv.nl/?url=thumbnailpacks.libretro.com/Nintendo - Nintendo Entertainment System/Named_Titles/{{ screenshot }}"
+                  >
+                {% endif %}
+                <div class="name">
+                  {{ item.game }}
+                </div>
+              </div>
             </td>
             <td class="dev">
               {% if dev %}
@@ -118,24 +122,23 @@
                 </ul>
               {% endif %}
             </td>
-            <td class="license" data-sort="{{ licensed }}">
+            <td class="license" data-sort="{{ licensed | to_integer }}.{{ forloop.index }}">
               {% if licensed %}
                 <img class="seal" src="assets/images/licensed.png">
               {% endif %}
             </td>
-            <td class="ep" data-sort="{{ item.ep }}">
+            <td class="ep" data-sort="{{ item.ep }}.{{ forloop.index }}">
               {% if item.ytid %}
                 <a href="https://www.youtube.com/watch?v={{ item.ytid }}">
                   <img class="thumbnail"  loading="lazy"
                     src="https://wsrv.nl/?url=i.ytimg.com/vi/{{ item.ytid }}/default.jpg"
-                  >
-                  {{ item.ep }}
+                  >{{ item.ep }}
                 </a>
               {% else %}
                 {{ item.ep }}
               {% endif %}
             </td>
-            <td class="timestamp">
+            <td class="timestamp" data-sort="{{ item.ep }}.{{ item.seconds }}">
               {% if item.ytid and item.seconds %}
                 <a href="https://www.youtube.com/watch?v={{ item.ytid }}&t={{ item.seconds }}s">
                   {{ item.seconds | date: "%H:%M:%S"}}
@@ -164,6 +167,7 @@
   </div>
   <script type="text/javascript" src="assets/js/tablesort.min.js"></script>
   <script type="text/javascript" src="assets/js/tablesort.number.min.js"></script>
+  <script type="text/javascript" src="assets/js/tablesort.dotsep.min.js"></script>
   <script type="text/javascript">
     new Tablesort(document.getElementById('ranking'));
   </script>
