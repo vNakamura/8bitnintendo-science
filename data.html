@@ -1,0 +1,51 @@
+---
+robots: noindex
+---
+<h1>Libretro Images</h1>
+<table border="1">
+  <thead>
+    <tr><th>filename</th></tr>
+  </thead>
+  <tbody>
+    {% for image in site.data.libretro %}
+      <tr><td>{{ image.filename }}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h1>Licensed</h1>
+<table border="1">
+  <thead>
+    <tr>
+      <th>title</th>
+      <th>line</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for game in site.data.licensed_games %}
+      <tr>
+        <td>{{ game.title | newline_to_br }}</td>
+        <td>l_{{ forloop.index0 }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h1>Unlicensed</h1>
+<table border="1">
+  <thead>
+    <tr>
+      <th>title</th>
+      <th>line</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for game in site.data.unlicensed_games %}
+      <tr>
+        <td>{{ game.title | newline_to_br }}</td>
+        <td>u_{{ forloop.index0 }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+

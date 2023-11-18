@@ -1,6 +1,5 @@
 ---
 title: 8-bit Nintendo Science
-layout: default
 ---
 <section class="header">
   <div class="left">
@@ -36,9 +35,23 @@ layout: default
     </thead>
     <tbody>
       {% for item in site.data.list %}
+      {% assign wiki_data = nil %}
       {% assign screenshot = nil %}
       {% assign licensed = true %}
-      {% assign wiki_data = site.data.licensed_games | where: "title", item.game | first %}
+
+      {% if item.wiki_line %}
+        {% assign line = item.wiki_line | split: "_" %}
+        {% assign i = line[1] | to_integer %}
+        {% if line[0] == "l" %}
+          {% assign wiki_data = site.data.licensed_games[i] %}
+        {% else %}
+          {% assign wiki_data = site.data.unlicensed_games[i] %}
+        {% endif %}
+      {% endif %}
+
+      {% unless wiki_data %}
+        {% assign wiki_data = site.data.licensed_games | where: "title", item.game | first %}
+      {% endunless %}
       {% unless wiki_data %}
         {% assign wiki_data = site.data.unlicensed_games | where: "title", item.game | first %}
         {% if wiki_data %}{% assign licensed = false %}{% endif %}
@@ -86,7 +99,7 @@ layout: default
                 src="https://wsrv.nl/?url=thumbnailpacks.libretro.com/Nintendo - Nintendo Entertainment System/Named_Snaps/{{ screenshot }}"
               >
             {% endif %}
-            <div class="name">
+            <div class="name" title="{{ wiki_data.title }}">
               {{ item.game }}
             </div>
           </div>

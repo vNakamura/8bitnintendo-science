@@ -3,4 +3,9 @@ defaults:
       path: "assets/img"
     values:
       image: true
+  - scope:
+      path: ""
+    values:
+      layout: default
+      robots: index
 timezone: UTC
