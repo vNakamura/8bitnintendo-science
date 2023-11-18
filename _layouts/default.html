@@ -20,6 +20,7 @@
   <title>{{ page.title }}</title>
   <link rel="stylesheet" href="assets/css/styles.css?{{ "now" | date: "%s" }}">
   <link rel="stylesheet" href="assets/css/tablesort.css?{{ "now" | date: "%s" }}">
+  <link rel="stylesheet" href="assets/css/zoom.css?{{ "now" | date: "%s" }}">
 </head>
 <body>
   <div class="container">
@@ -32,5 +33,6 @@
   <script type="text/javascript">
     new Tablesort(document.getElementById('ranking'));
   </script>
+  <script type="text/javascript" src="assets/js/zoom-vanilla.js"></script>
 </body>
 </html>

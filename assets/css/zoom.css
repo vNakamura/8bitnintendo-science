@@ -1,0 +1,27 @@
+img[data-action="zoom"] {
+  cursor: zoom-in;
+}
+.zoom-img,
+.zoom-img-wrap {
+  position: relative;
+  z-index: 666;
+  transition: all 200ms;
+}
+img.zoom-img {
+  cursor: zoom-out;
+}
+.zoom-overlay {
+  cursor: zoom-out;
+  z-index: 420;
+  background: rgba(0,0,0,0.8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  transition: opacity 200ms;
+}
+.zoom-overlay-open .zoom-overlay {
+  opacity: 1;
+}

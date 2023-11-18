@@ -80,8 +80,10 @@ layout: default
         <td class="title">
           <div class="title-wrapper">
             {% if screenshot %}
-              <img class="title-screen"  loading="lazy"
+              <img class="title-screen"  loading="lazy"  data-action="zoom"
                 src="https://wsrv.nl/?url=thumbnailpacks.libretro.com/Nintendo - Nintendo Entertainment System/Named_Titles/{{ screenshot }}"
+              ><img class="title-screen"  loading="lazy"  data-action="zoom"
+                src="https://wsrv.nl/?url=thumbnailpacks.libretro.com/Nintendo - Nintendo Entertainment System/Named_Snaps/{{ screenshot }}"
               >
             {% endif %}
             <div class="name">
