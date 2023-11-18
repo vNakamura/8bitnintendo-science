@@ -1,175 +1,144 @@
 ---
+title: 8-bit Nintendo Science
+layout: default
 ---
-
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
-  <link rel="manifest" href="assets/favicon/site.webmanifest">
-  <link rel="mask-icon" href="assets/favicon/safari-pinned-tab.svg" color="#0cff00">
-  <link rel="shortcut icon" href="assets/favicon/favicon.ico">
-  <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="msapplication-config" content="assets/favicon/browserconfig.xml">
-  <meta name="theme-color" content="#000000">
-
-
-  <title>8-bit Nintendo Science</title>
-  <link rel="stylesheet" href="assets/css/styles.css?{{ "now" | date: "%s" }}">
-  <link rel="stylesheet" href="assets/css/tablesort.css?{{ "now" | date: "%s" }}">
-</head>
-<body>
-  <div class="container">
-    <img class="text3d" src="assets/images/science_crop.gif">
-    <section class="header">
-      <div class="left">
-        <img src="assets/images/nes.gif">
-      </div>
-      <div class="title">
-        <h1>An Exhaustive and Definitive Ranking of All Nintendo Entertainment System Games Released in North America, Where We Determine Which Games Are the Absolute Pinnacle of 8-Bit Excellence and Which Ones Make You Question Life Choices, Ranked from Best to Worst</h1>
-      </div>
-      <div class="right">
-        <img src="assets/images/dancing-baby.gif">
-      </div>
-    </section>
-
-    <section class="the-list">
-      <table id="ranking" border="1">
-        <colgroup>
-          <col class="rank">
-          <col class="title">
-          <col class="dev">
-          <col class="license">
-          <col class="ep">
-          <col class="timestamp">
-        </colgroup>
-        <thead>
-          <tr>
-            <th data-sort-method='number' data-sort-default>#</th>
-            <th>Game</th>
-            <th>Developer(s)</th>
-            <th class="license" data-sort-method='dotsep'><img class="seal" src="assets/images/licensed.png"></th>
-            <th data-sort-method='dotsep'>Episode</th>
-            <th data-sort-method='dotsep'>Time</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for item in site.data.list %}
-          {% assign screenshot = nil %}
-          {% assign licensed = true %}
-          {% assign wiki_data = site.data.licensed_games | where: "title", item.game | first %}
-          {% unless wiki_data %}
-            {% assign wiki_data = site.data.unlicensed_games | where: "title", item.game | first %}
-            {% if wiki_data %}{% assign licensed = false %}{% endif %}
-          {% endunless %}
-          {% unless wiki_data %}
-            {% assign wiki_data = site.data.licensed_games | where_exp: "game", "game.title contains item.game" | first %}
-          {% endunless %}
-          {% unless wiki_data %}
-            {% assign wiki_data = site.data.unlicensed_games | where_exp: "game", "game.title contains item.game" | first %}
-            {% if wiki_data %}{% assign licensed = false %}{% endif %}
-          {% endunless %}
-
-          {% assign dev = wiki_data.developer %}
-          {% unless dev %}
-            {% assign dev = wiki_data.publisher %}
-          {% endunless %}
-
-          {% if item.screenshot %}
-            {% assign screenshot = item.screenshot %}
-          {% else %}
-            {% assign search = item.game | replace: ":", " -" %}
-            {% assign libretro_file = site.data.libretro | where_exp: "i", "i.filename contains search" | first %}
-            {% if libretro_file %}
-              {% assign screenshot = libretro_file.filename %}
-            {% endif %}
-          {% endif %}
-          <tr>
-            <td class="rank" data-sort="{{ forloop.index }}">
-              {% if forloop.index == 1 %}
-                <img class="medal" src="assets/images/gold.gif">
-              {% elsif forloop.index == 2 %}
-                <img class="medal" src="assets/images/silver.gif">
-              {% elsif forloop.index == 3 %}
-                <img class="medal" src="assets/images/bronze.gif">
-              {% else %}
-                {{ forloop.index }}
-              {% endif %}
-            </td>
-            <td class="title">
-              <div class="title-wrapper">
-                {% if screenshot %}
-                  <img class="title-screen"  loading="lazy"
-                    src="https://wsrv.nl/?url=thumbnailpacks.libretro.com/Nintendo - Nintendo Entertainment System/Named_Titles/{{ screenshot }}"
-                  >
-                {% endif %}
-                <div class="name">
-                  {{ item.game }}
-                </div>
-              </div>
-            </td>
-            <td class="dev">
-              {% if dev %}
-                {% assign companies = dev | newline_to_br | split: "<br />" %}
-                <ul>
-                  {% for company in companies %}
-                    <li>{{company}}</li>
-                  {% endfor %}
-                </ul>
-              {% endif %}
-            </td>
-            <td class="license" data-sort="{{ licensed | to_integer }}.{{ forloop.index }}">
-              {% if licensed %}
-                <img class="seal" src="assets/images/licensed.png">
-              {% endif %}
-            </td>
-            <td class="ep" data-sort="{{ item.ep }}.{{ forloop.index }}">
-              {% if item.ytid %}
-                <a href="https://www.youtube.com/watch?v={{ item.ytid }}">
-                  <img class="thumbnail"  loading="lazy"
-                    src="https://wsrv.nl/?url=i.ytimg.com/vi/{{ item.ytid }}/default.jpg"
-                  >{{ item.ep }}
-                </a>
-              {% else %}
-                {{ item.ep }}
-              {% endif %}
-            </td>
-            <td class="timestamp" data-sort="{{ item.ep }}.{{ item.seconds }}">
-              {% if item.ytid and item.seconds %}
-                <a href="https://www.youtube.com/watch?v={{ item.ytid }}&t={{ item.seconds }}s">
-                  {{ item.seconds | date: "%H:%M:%S"}}
-                </a>
-              {% endif %}
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-      <img class="garfield" src="assets/images/garfield.png">
-    </section>
-
-    <img class="divider" src="assets/images/electricbar.gif">
-
-    <section class="about">
-      <h2>The list is 
-        <img src="assets/images/under-construction.gif" width="200">
-      </h2>
-      <p>
-        This page is maintained by fans and is updated as Scientist Jeff Gerstmann proceeds in his work of <code>#BuildingTheList</code>. You can watch science in action live on <a href="https://www.twitch.tv/jeffgerstmann">twitch.tv/jeffgerstmann</a> or check out previous episodes on <a href="https://www.youtube.com/playlist?list=PLDKeuvgV0sxZ_xs4zUvQcMEV-LTjSf-Ok">youtube.com/TheJeffGerstmannShow</a>.
-      </p>
-      <p>If any information is missing or incorrect, consider submiting a fix to our <a href="https://github.com/vNakamura/8bitnintendo-science">GitHub repository</a>.
-      </p>
-    </section>
+<section class="header">
+  <div class="left">
+    <img src="assets/images/nes.gif">
   </div>
-  <script type="text/javascript" src="assets/js/tablesort.min.js"></script>
-  <script type="text/javascript" src="assets/js/tablesort.number.min.js"></script>
-  <script type="text/javascript" src="assets/js/tablesort.dotsep.min.js"></script>
-  <script type="text/javascript">
-    new Tablesort(document.getElementById('ranking'));
-  </script>
-</body>
-</html>
+  <div class="title">
+    <h1>An Exhaustive and Definitive Ranking of All Nintendo Entertainment System Games Released in North America, Where We Determine Which Games Are the Absolute Pinnacle of 8-Bit Excellence and Which Ones Make You Question Life Choices, Ranked from Best to Worst</h1>
+  </div>
+  <div class="right">
+    <img src="assets/images/dancing-baby.gif">
+  </div>
+</section>
+
+<section class="the-list">
+  <table id="ranking" border="1">
+    <colgroup>
+      <col class="rank">
+      <col class="title">
+      <col class="dev">
+      <col class="license">
+      <col class="ep">
+      <col class="timestamp">
+    </colgroup>
+    <thead>
+      <tr>
+        <th data-sort-method='number' data-sort-default>#</th>
+        <th>Game</th>
+        <th>Developer(s)</th>
+        <th class="license" data-sort-method='dotsep'><img class="seal" src="assets/images/licensed.png"></th>
+        <th data-sort-method='dotsep'>Episode</th>
+        <th data-sort-method='dotsep'>Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in site.data.list %}
+      {% assign screenshot = nil %}
+      {% assign licensed = true %}
+      {% assign wiki_data = site.data.licensed_games | where: "title", item.game | first %}
+      {% unless wiki_data %}
+        {% assign wiki_data = site.data.unlicensed_games | where: "title", item.game | first %}
+        {% if wiki_data %}{% assign licensed = false %}{% endif %}
+      {% endunless %}
+      {% unless wiki_data %}
+        {% assign wiki_data = site.data.licensed_games | where_exp: "game", "game.title contains item.game" | first %}
+      {% endunless %}
+      {% unless wiki_data %}
+        {% assign wiki_data = site.data.unlicensed_games | where_exp: "game", "game.title contains item.game" | first %}
+        {% if wiki_data %}{% assign licensed = false %}{% endif %}
+      {% endunless %}
+
+      {% assign dev = wiki_data.developer %}
+      {% unless dev %}
+        {% assign dev = wiki_data.publisher %}
+      {% endunless %}
+
+      {% if item.screenshot %}
+        {% assign screenshot = item.screenshot %}
+      {% else %}
+        {% assign search = item.game | replace: ":", " -" %}
+        {% assign libretro_file = site.data.libretro | where_exp: "i", "i.filename contains search" | first %}
+        {% if libretro_file %}
+          {% assign screenshot = libretro_file.filename %}
+        {% endif %}
+      {% endif %}
+      <tr>
+        <td class="rank" data-sort="{{ forloop.index }}">
+          {% if forloop.index == 1 %}
+            <img class="medal" src="assets/images/gold.gif">
+          {% elsif forloop.index == 2 %}
+            <img class="medal" src="assets/images/silver.gif">
+          {% elsif forloop.index == 3 %}
+            <img class="medal" src="assets/images/bronze.gif">
+          {% else %}
+            {{ forloop.index }}
+          {% endif %}
+        </td>
+        <td class="title">
+          <div class="title-wrapper">
+            {% if screenshot %}
+              <img class="title-screen"  loading="lazy"
+                src="https://wsrv.nl/?url=thumbnailpacks.libretro.com/Nintendo - Nintendo Entertainment System/Named_Titles/{{ screenshot }}"
+              >
+            {% endif %}
+            <div class="name">
+              {{ item.game }}
+            </div>
+          </div>
+        </td>
+        <td class="dev">
+          {% if dev %}
+            {% assign companies = dev | newline_to_br | split: "<br />" %}
+            <ul>
+              {% for company in companies %}
+                <li>{{company}}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </td>
+        <td class="license" data-sort="{{ licensed | to_integer }}.{{ forloop.index }}">
+          {% if licensed %}
+            <img class="seal" src="assets/images/licensed.png">
+          {% endif %}
+        </td>
+        <td class="ep" data-sort="{{ item.ep }}.{{ forloop.index }}">
+          {% if item.ytid %}
+            <a href="https://www.youtube.com/watch?v={{ item.ytid }}">
+              <img class="thumbnail"  loading="lazy"
+                src="https://wsrv.nl/?url=i.ytimg.com/vi/{{ item.ytid }}/default.jpg"
+              >{{ item.ep }}
+            </a>
+          {% else %}
+            {{ item.ep }}
+          {% endif %}
+        </td>
+        <td class="timestamp" data-sort="{{ item.ep }}.{{ item.seconds }}">
+          {% if item.ytid and item.seconds %}
+            <a href="https://www.youtube.com/watch?v={{ item.ytid }}&t={{ item.seconds }}s">
+              {{ item.seconds | date: "%H:%M:%S"}}
+            </a>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <img class="garfield" src="assets/images/garfield.png">
+</section>
+
+<img class="divider" src="assets/images/electricbar.gif">
+
+<section class="about">
+  <h2>The list is 
+    <img src="assets/images/under-construction.gif" width="200">.
+    See the <a href="./remaining.html">remaining</a> games.
+  </h2>
+  <p>
+    This page is maintained by fans and is updated as Scientist Jeff Gerstmann proceeds in his work of <code>#BuildingTheList</code>. You can watch science in action live on <a href="https://www.twitch.tv/jeffgerstmann">twitch.tv/jeffgerstmann</a> or check out previous episodes on <a href="https://www.youtube.com/playlist?list=PLDKeuvgV0sxZ_xs4zUvQcMEV-LTjSf-Ok">youtube.com/TheJeffGerstmannShow</a>.
+  </p>
+  <p>If any information is missing or incorrect, consider submiting a fix to our <a href="https://github.com/vNakamura/8bitnintendo-science">GitHub repository</a>.
+  </p>
+</section>

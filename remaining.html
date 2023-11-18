@@ -1,0 +1,70 @@
+---
+title: Remaining Games
+layout: default
+---
+  {% assign remaining_l = site.data.licensed_games %}
+  {% assign remaining_u = site.data.unlicensed_games %}
+
+  {% for item in site.data.list %}
+    {% assign screenshot = nil %}
+    {% assign licensed = true %}
+    {% assign wiki_data = site.data.licensed_games | where: "title", item.game | first %}
+    {% unless wiki_data %}
+      {% assign wiki_data = site.data.unlicensed_games | where: "title", item.game | first %}
+      {% if wiki_data %}{% assign licensed = false %}{% endif %}
+    {% endunless %}
+    {% unless wiki_data %}
+      {% assign wiki_data = site.data.licensed_games | where_exp: "game", "game.title contains item.game" | first %}
+    {% endunless %}
+    {% unless wiki_data %}
+      {% assign wiki_data = site.data.unlicensed_games | where_exp: "game", "game.title contains item.game" | first %}
+      {% if wiki_data %}{% assign licensed = false %}{% endif %}
+    {% endunless %}
+
+    {% if wiki_data and licensed %}
+      {% assign remaining_l = remaining_l | where_exp: "game", "game.title != wiki_data.title" %}
+    {% endif %}
+    {% if wiki_data %}
+      {% assign remaining_u = remaining_u | where_exp: "game", "game.title != wiki_data.title" %}
+    {% endif %}
+  {% endfor %}
+
+  <h1>Games Pending Scientific Analysis</h1>
+
+  <h2>Licensed Games</h2>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Game</th>
+        <th>Developer(s)</th>
+        <th>Publisher(s)</th>
+        <th>NA Release</th>
+      </tr>
+    </thead>
+    {% for item in remaining_l %}
+      <tr>
+        <td>{{ item.title | newline_to_br }}</td>
+        <td>{{ item.developer | newline_to_br }}</td>
+        <td>{{ item.publisher | newline_to_br }}</td>
+        <td>{{ item.NA_release | newline_to_br }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+
+  <h2>Unlicensed Games</h2>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Game</th>
+        <th>Publisher(s)</th>
+        <th>Release</th>
+      </tr>
+    </thead>
+    {% for item in remaining_u %}
+      <tr>
+        <td>{{ item.title | newline_to_br }}</td>
+        <td>{{ item.publisher | newline_to_br }}</td>
+        <td>{{ item.year | newline_to_br }}</td>
+      </tr>
+    {% endfor %}
+  </table>

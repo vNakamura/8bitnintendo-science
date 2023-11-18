@@ -28,6 +28,15 @@ a:visited
     display: block
     margin: auto
 
+h1, h2, h3, h4, h5, h6
+  font-family: $title-font
+h1
+  font-size: 2rem
+  color: yellow
+  animation: 1s infinite alternate glow
+h2
+  font-size: 1.6rem
+
 .header
   display: flex
   flex-direction: row
@@ -36,31 +45,28 @@ a:visited
 
   h1
     text-align: justify
-    font-family: $title-font
-    font-size: 2rem
-    color: yellow
-    animation: 1s infinite alternate glow
+
+table
+  width: 100%
+  background: black
+  margin: 2rem auto
+
+  thead
+    position: sticky
+    top: 0
+    background: black
+
+  td,th
+    padding: 1ch
 
 .the-list
   position: relative
-
   table#ranking
-    width: 100%
-    background: black
-    margin: 2rem auto
-
-    thead
-      position: sticky
-      top: 0
-      background: black
-
     col.rank
       width: 8ch
     col.dev
       width: 20ch
     
-    td,th
-      padding: 1ch
     th
       white-space: nowrap
 
