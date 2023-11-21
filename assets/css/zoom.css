@@ -5,7 +5,7 @@ img[data-action="zoom"] {
 .zoom-img-wrap {
   position: relative;
   z-index: 666;
-  transition: all 200ms;
+  transition: all 0.2s;
 }
 img.zoom-img {
   cursor: zoom-out;
@@ -20,7 +20,7 @@ img.zoom-img {
   right: 0;
   bottom: 0;
   opacity: 0;
-  transition: opacity 200ms;
+  transition: opacity 0.5s;
 }
 .zoom-overlay-open .zoom-overlay {
   opacity: 1;

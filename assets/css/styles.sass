@@ -99,11 +99,19 @@ table
   th > img.seal
     width: 4ch
 
-  img.thumbnail, img.title-screen
+  img.thumbnail, img.screenshot
     height: 36px
     border: none
     vertical-align: middle
     margin-right: 1ch
+  
+  img.screenshot
+    image-rendering: auto
+    transition: transform 0.2s
+    &:hover
+      transform: scale(1.3)
+    &:active
+      transform: scale(1.2)
 
   img.garfield
     pointer-events: none
