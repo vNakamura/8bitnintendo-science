@@ -1,5 +1,5 @@
 +function () { "use strict";
-	var OFFSET = 80
+	var OFFSET = 10
 
 	function offset(element) {
 		var rect = element.getBoundingClientRect()
@@ -185,9 +185,10 @@
 
 			var imageOffset = offset(targetImage)
 			var scrollTop   = window.pageYOffset
+			var scrollLeft	= window.pageXOffset
 
 			var viewportY = scrollTop + (window.innerHeight / 2)
-			var viewportX = (window.innerWidth / 2)
+			var viewportX = scrollLeft + (window.innerWidth / 2)
 
 			var imageCenterY = imageOffset.top + (targetImage.height / 2)
 			var imageCenterX = imageOffset.left + (targetImage.width / 2)
