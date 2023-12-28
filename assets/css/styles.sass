@@ -24,7 +24,8 @@ a:visited
   margin: auto
 
   img.text3d
-    width: 478px
+    width: 100%
+    max-width: 478px
     display: block
     margin: auto
 
@@ -49,22 +50,31 @@ h2
 table
   width: 100%
   background: black
-  margin: 2rem auto
 
   thead
     position: sticky
-    top: 0
+    top: -2px
     background: black
+    z-index: 1
 
   td,th
     padding: 1ch
+    &.rank
+      position: sticky
+      left: 0
+      background: black
 
 .the-list
   position: relative
+  max-width: 100%
+  margin: 2rem auto
+
   table#ranking
-    col.rank
+    td.rank
       width: 8ch
-    col.dev
+    td.title
+      min-width: 45ch
+    td.dev
       width: 20ch
     
     th
@@ -122,6 +132,37 @@ table
 img.divider
   width: 100%
 
+@media(max-width: 1000px)
+  body
+    font-size: 0.8em
+  h1
+    font-size: 1.2rem
+  h2
+    font-size: 1.1rem
+  body
+    padding: 2rem 10px
+
+  .garfield
+    display: none
+  .the-list
+    overflow-x: auto
+    overscroll-behavior-x: none
+    max-height: 90vh
+
+  .header
+    flex-wrap: wrap
+    justify-content: space-evenly
+    .title
+      order: 0
+    .left
+      order: 1
+    .right
+      order: 2
+
+@media(max-width: 600px)
+  .the-list
+    .year, .dev, .license
+      display: none
 
 @keyframes glow
   from

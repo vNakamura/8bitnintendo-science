@@ -18,6 +18,7 @@ title: 8-bit Nintendo Science
     <colgroup>
       <col class="rank">
       <col class="title">
+      <col class="year">
       <col class="dev">
       <col class="license">
       <col class="ep">
@@ -25,12 +26,13 @@ title: 8-bit Nintendo Science
     </colgroup>
     <thead>
       <tr>
-        <th data-sort-method='number' data-sort-default>#</th>
-        <th>Game</th>
-        <th>Developer(s)</th>
+        <th class="rank" data-sort-method='number' data-sort-default>#</th>
+        <th class="title">Game</th>
+        <th class="year" data-sort-method='dotsep'>Year</th>
+        <th class="dev">Developer(s)</th>
         <th class="license" data-sort-method='dotsep'><img class="seal" src="assets/images/licensed.png"></th>
-        <th data-sort-method='dotsep'>Episode</th>
-        <th data-sort-method='dotsep'>Time</th>
+        <th class="ep" data-sort-method='dotsep'>Episode</th>
+        <th class="timestamp" data-sort-method='dotsep'>Time</th>
       </tr>
     </thead>
     <tbody>
@@ -104,6 +106,9 @@ title: 8-bit Nintendo Science
             </div>
           </div>
         </td>
+        <td class="year" data-sort="{{ wiki_data.year }}.{{ forloop.index }}">
+          {{ wiki_data.year }}
+        </td>
         <td class="dev">
           {% if dev %}
             {% assign companies = dev | newline_to_br | split: "<br />" %}
@@ -119,18 +124,18 @@ title: 8-bit Nintendo Science
             <img class="seal" src="assets/images/licensed.png">
           {% endif %}
         </td>
-        <td class="ep" data-sort="{{ item.ep }}.{{ forloop.index }}">
+        <td class="ep" data-sort="{{ item.ep }}.0.{{ forloop.index }}">
           {% if item.ytid %}
             <a href="https://www.youtube.com/watch?v={{ item.ytid }}">
               <img class="thumbnail"  loading="lazy"
                 src="https://wsrv.nl/?url=i.ytimg.com/vi/{{ item.ytid }}/default.jpg"
-              >{{ item.ep }}
+              >{{ item.ep | replace: ".", "-" }}
             </a>
           {% else %}
-            {{ item.ep }}
+            {{ item.ep | replace: ".", "-" }}
           {% endif %}
         </td>
-        <td class="timestamp" data-sort="{{ item.ep }}.{{ item.seconds }}">
+        <td class="timestamp" data-sort="{{ item.ep }}.0.{{ item.seconds }}">
           {% if item.ytid and item.seconds %}
             <a href="https://www.youtube.com/watch?v={{ item.ytid }}&t={{ item.seconds }}s">
               {{ item.seconds | date: "%H:%M:%S"}}
@@ -148,7 +153,7 @@ title: 8-bit Nintendo Science
 
 <section class="about">
   <h2>The list is 
-    <img src="assets/images/under-construction.gif" width="200">.
+    <img src="assets/images/under-construction.gif" width="120">.
     See the <a href="./remaining.html">remaining</a> games.
   </h2>
   <p>
@@ -156,4 +161,6 @@ title: 8-bit Nintendo Science
   </p>
   <p>If any information is missing or incorrect, consider submiting a fix to our <a href="https://github.com/vNakamura/8bitnintendo-science">GitHub repository</a>.
   </p>
+  <p>
+    Game details (developer, release date, ...) from <a href="https://en.wikipedia.org/wiki/List_of_Nintendo_Entertainment_System_games">Wikipedia</a>. Game images from <a href="https://github.com/libretro-thumbnails/libretro-thumbnails">Libretro</a>.
 </section>
