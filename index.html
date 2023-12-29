@@ -15,15 +15,6 @@ title: 8-bit Nintendo Science
 
 <section class="the-list">
   <table id="ranking" border="1">
-    <colgroup>
-      <col class="rank">
-      <col class="title">
-      <col class="year">
-      <col class="dev">
-      <col class="license">
-      <col class="ep">
-      <col class="timestamp">
-    </colgroup>
     <thead>
       <tr>
         <th class="rank" data-sort-method='number' data-sort-default>#</th>
@@ -31,7 +22,7 @@ title: 8-bit Nintendo Science
         <th class="year" data-sort-method='dotsep'>Year</th>
         <th class="dev">Developer(s)</th>
         <th class="license" data-sort-method='dotsep'><img class="seal" src="assets/images/licensed.png"></th>
-        <th class="ep" data-sort-method='dotsep'>Episode</th>
+        <th class="ep" data-sort-method='dotsep'>Ep<span>isode</span></th>
         <th class="timestamp" data-sort-method='dotsep'>Time</th>
       </tr>
     </thead>
@@ -95,7 +86,7 @@ title: 8-bit Nintendo Science
         <td class="title">
           <div class="title-wrapper">
             {% if screenshot %}
-              <img class="screenshot"  loading="lazy"  data-action="zoom"
+              <img class="screenshot titlescreen"  loading="lazy"  data-action="zoom"
                 src="https://wsrv.nl/?url=thumbnailpacks.libretro.com/Nintendo - Nintendo Entertainment System/Named_Titles/{{ screenshot }}"
               ><img class="screenshot"  loading="lazy"  data-action="zoom"
                 src="https://wsrv.nl/?url=thumbnailpacks.libretro.com/Nintendo - Nintendo Entertainment System/Named_Snaps/{{ screenshot }}"

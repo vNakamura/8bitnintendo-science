@@ -45,7 +45,7 @@ h2
   gap: 2rem
 
   h1
-    text-align: justify
+    text-align: center
 
 table
   width: 100%
@@ -70,17 +70,13 @@ table
   margin: 2rem auto
 
   table#ranking
-    td.rank
-      width: 8ch
-    td.title
-      min-width: 45ch
     td.dev
       width: 20ch
     
     th
       white-space: nowrap
 
-    td.rank,td.license
+    td.rank, td.license, td.year
       text-align: center
 
     td .title-wrapper
@@ -134,35 +130,43 @@ img.divider
 
 @media(max-width: 1000px)
   body
+    margin: 0
+    padding: 2rem 1rem
     font-size: 0.8em
   h1
     font-size: 1.2rem
   h2
     font-size: 1.1rem
-  body
-    padding: 2rem 10px
 
   .garfield
     display: none
   .the-list
-    overflow-x: auto
-    overscroll-behavior-x: none
-    max-height: 90vh
+    margin: 2rem -0.8rem
+    max-width: 100vw
+    td.title
+      min-width: unset
+
+@media(max-width: 700px)
+  .the-list
+    .dev, .license
+      display: none
 
   .header
     flex-wrap: wrap
     justify-content: space-evenly
     .title
       order: 0
-    .left
+    .left, .right
       order: 1
-    .right
-      order: 2
+      img
+        max-width: 20vw
 
-@media(max-width: 600px)
+@media(max-width: 500px)
   .the-list
-    .year, .dev, .license
+    .year,.titlescreen, .thumbnail, th.ep>span
       display: none
+    td.ep
+      text-align: center
 
 @keyframes glow
   from
