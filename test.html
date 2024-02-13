@@ -22,6 +22,7 @@ title: Test Your Science
     Is <b class="p1">Super Pitfall</b> <button onclick="selected(0)">Better</button> or <button onclick="selected(1)">Worse</button> than <b class="p2">Dynowarz: Destruction of Spondylus</b>?
   </p>
 </div>
+<div class="score"></div>
 
 <script>
 function shuffleArray(originalArray) {
@@ -56,6 +57,8 @@ const list = [
 ]
 let shuffled = []
 let current = []
+let score = 0
+let total = 0
 function populate() {
   document.querySelector(`.answer`).innerHTML = ''
   if(shuffled.length < 2) {
@@ -67,6 +70,7 @@ function populate() {
   document.querySelector(`.question`).classList.remove('hidden')
   document.querySelector(`.players`).classList.remove('hidden')
   document.querySelectorAll('.player').forEach(el => el.classList.remove('broken'))
+  updateScore()
 }
 
 function replaceContent(c, game) {
@@ -91,6 +95,14 @@ function selected(p) {
   document.querySelector(`.player.${brokenP}`).classList.add(`broken`)
 
   document.querySelector(`.answer`).classList.remove(`hidden`)
+
+  score += correct
+  total += 1
+  updateScore()
+}
+
+function updateScore() {
+  document.querySelector('.score').textContent = `Score: ${score}/${total}`
 }
 
 document.addEventListener('DOMContentLoaded', populate)
