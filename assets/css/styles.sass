@@ -4,6 +4,9 @@ $title-font: "Comic Sans MS", sans-serif
 $default-font: "Times New Roman", serif
 $title-shadow: red 2px 4px
 
+*, *::after, *::before
+  box-sizing: border-box
+
 html
   background-color: black
 
@@ -13,11 +16,20 @@ body
   font-family: $default-font
   image-rendering: pixelated
   padding: 2rem 50px
+  min-height: 100svh
+  margin: 0
 
 a
   color: dodgerblue
 a:visited
   color: slateblue
+
+a.test-link
+  img
+    border: 0
+    max-width: 100%
+    width: 468px
+    image-rendering: smooth
 
 .container
   max-width: 120ch
@@ -72,7 +84,7 @@ table
   table#ranking
     td.dev
       width: 20ch
-    
+
     th
       white-space: nowrap
 
@@ -110,7 +122,7 @@ table
     border: none
     vertical-align: middle
     margin-right: 1ch
-  
+
   img.screenshot
     image-rendering: auto
     transition: transform 0.2s
@@ -127,6 +139,10 @@ table
 
 img.divider
   width: 100%
+
+.nav-links
+  display: flex
+  justify-content: space-between
 
 @media(max-width: 1000px)
   body

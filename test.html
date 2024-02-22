@@ -1,0 +1,110 @@
+---
+title: Test Your Science
+---
+<link rel="stylesheet" href="assets/css/test.css?{{ " now" | date: "%s" }}">
+<div class="nav-links"
+><a href="/" style="color:white">≪ Back to the list</a>
+<div class="score"></div></div>
+<div class="test">
+  <h1>Test Your Science</h1>
+  <div class="players hidden">
+    <div class="player p1">
+      <span><img class="screenshot" src=""></span>
+      <h2 class="title"></h2>
+    </div>
+    <div class="player p2">
+      <span><img class="screenshot" src=""></span>
+      <h2 class="title"></h2>
+    </div>
+  </div>
+</div>
+<div class="answer hidden"></div>
+<div class="question hidden">
+  <p>
+    Is <b class="p1">Super Pitfall</b> <button onclick="selected(0)">Better</button> or <button onclick="selected(1)">Worse</button> than <b class="p2">Dynowarz: Destruction of Spondylus</b>?
+  </p>
+</div>
+
+<script>
+function shuffleArray(originalArray) {
+    const array = originalArray.slice();
+
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+
+    return array;
+}
+
+const list = [
+{% for item in site.data.list %}
+{% assign screenshot = nil %}
+{% if item.screenshot %}
+  {% assign screenshot = item.screenshot %}
+{% else %}
+  {% assign search = item.game | replace: ":", " -" %}
+  {% assign libretro_file = site.data.libretro | where_exp: "i", "i.filename contains search" | first %}
+  {% if libretro_file %}
+    {% assign screenshot = libretro_file.filename %}
+  {% endif %}
+{% endif %}
+{
+  "rank": {{ forloop.index }},
+  "title": {{ item.game | jsonify }},
+  "screenshot": {{ screenshot | jsonify }}
+}{% unless forloop.last %},{% endunless %}
+{% endfor %}
+]
+let shuffled = []
+let current = []
+let score = 0
+let total = 0
+function populate() {
+  document.querySelector(`.answer`).innerHTML = ''
+  if(shuffled.length < 2) {
+    shuffled = shuffleArray(list)
+  }
+  current = [shuffled.pop(), shuffled.pop()]
+  replaceContent("p1", current[0])
+  replaceContent("p2", current[1])
+  document.querySelector(`.question`).classList.remove('hidden')
+  document.querySelector(`.players`).classList.remove('hidden')
+  document.querySelectorAll('.player').forEach(el => el.classList.remove('broken'))
+  updateScore()
+}
+
+function replaceContent(c, game) {
+  document.querySelector(`.player.${c} .screenshot`).src = `https://wsrv.nl/?h=240&output=png&url=thumbnailpacks.libretro.com/Nintendo%20-%20Nintendo%20Entertainment%20System/Named_Snaps/${game.screenshot}`
+  document.querySelector(`.player.${c} .title`).textContent = game.title
+  document.querySelector(`.question .${c}`).textContent = game.title
+}
+
+function selected(p) {
+  const correct = current[p].rank < current[1-p].rank
+  const h2Content = correct ? 'Correct' : "Wrong"
+  const pContent = `<b>${current[0].title}</b> (#${current[0].rank}) ${
+    current[0].rank < current[1].rank ? "is better than" : "is no"
+  } <b>${current[1].title}</b> (#${current[1].rank}).`
+  document.querySelector(`.question`).classList.add(`hidden`)
+  document.querySelector(`.answer`).innerHTML = `
+    <h2 class="${h2Content.toLowerCase()}">${h2Content}!</h2>
+    <p>${pContent}</p>
+    <button onclick="populate()">Next</button>
+  `
+  const brokenP = current[0].rank < current[1].rank ? "p2" : "p1"
+  document.querySelector(`.player.${brokenP}`).classList.add(`broken`)
+
+  document.querySelector(`.answer`).classList.remove(`hidden`)
+
+  score += correct
+  total += 1
+  updateScore()
+}
+
+function updateScore() {
+  document.querySelector('.score').textContent = `Score: ${score}/${total}`
+}
+
+document.addEventListener('DOMContentLoaded', populate)
+</script>

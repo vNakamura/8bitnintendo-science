@@ -1,0 +1,125 @@
+---
+---
+
+@font-face
+  font-family: "MK"
+  src: url('./mk1-webfont.woff2') format('woff2'), url('./mk1-webfont.woff') format('woff')
+  font-weight: normal
+  font-style: normal
+
+.container img.text3d
+  display: none
+
+.hidden
+  display: none
+
+.test
+  position: relative
+  width: 100%
+  max-width: 860px
+  margin: 0 auto
+  aspect-ratio: 415 / 286
+  background: url("../images/mk-test.png")
+  background-size: cover
+  border: ridge 0.6em gray
+
+  h1, h2
+    font-family: "MK"
+    color: gold
+  h1
+    font-size: 3.5rem
+    text-align: center
+    padding: 1rem
+    text-transform: uppercase
+    text-shadow: black 0.12em 0.12em
+    animation: 0.1s step-start infinite alternate flash
+  h2
+    font-size: 2.5rem
+    text-shadow: black 0.1em 0.1em
+    margin: 0.3em 0
+    line-height: 1
+
+  .players
+    position: absolute
+    top: 32%
+    left: 10%
+    right: 10%
+    bottom: 0
+    display: flex
+    justify-content: space-between
+
+  .player
+    width: 48%
+    text-align: center
+    img
+      border: ridge 0.6em gray
+      max-width: 100%
+      max-height: 60%
+      margin: 0
+    span
+      line-height: 0
+      position: relative
+      display: inline-block
+    &.broken
+      span
+        mask-image: url("../images/crack-mask.png")
+        mask-size: 100% 100%
+        &::after
+          content: ''
+          display: block
+          position: absolute
+          top: 0
+          right: 0
+          bottom: 0
+          left: 0
+          background: url("../images/crack-overlay.png")
+          background-size: 100% 100%
+      h2
+        color: sienna
+
+
+  @media(max-width: 1000px)
+    h1
+      font-size: 6vw
+    h2
+      font-size: 4vw
+    .players
+      top: 25%
+    .player img
+      border-width: 0.8vw
+
+.question, .answer, .score
+  text-align: center
+  font-size: 1.5rem
+  b
+    color: gold
+  button
+    border: 3px solid
+    background-color: lightgray
+    border-color: white gray gray white
+    padding: 0.2em 1em
+    color: black
+    text-shadow: white 1px 1px
+    font-size: 1em
+    font-family: inherit
+    &:hover
+      background-color: gray
+      text-shadow: silver 1px 1px
+      border-color: silver dimgray dimgray silver
+    &:active
+      background-color: gray
+      border-color: dimgray silver silver dimgray
+      color: transparent
+      text-shadow: black 1px 1px, silver 2px 2px
+
+.answer
+  h2.correct
+    color: springgreen
+  h2.wrong
+    color: crimson
+
+@keyframes flash
+  from
+    color: gold
+  50%
+    color: yellow
