@@ -2,7 +2,9 @@
 title: Test Your Science
 ---
 <link rel="stylesheet" href="assets/css/test.css?{{ " now" | date: "%s" }}">
-
+<div class="nav-links"
+><a href="/" style="color:white">≪ Back to the list</a>
+<div class="score"></div></div>
 <div class="test">
   <h1>Test Your Science</h1>
   <div class="players hidden">
@@ -22,7 +24,6 @@ title: Test Your Science
     Is <b class="p1">Super Pitfall</b> <button onclick="selected(0)">Better</button> or <button onclick="selected(1)">Worse</button> than <b class="p2">Dynowarz: Destruction of Spondylus</b>?
   </p>
 </div>
-<div class="score"></div>
 
 <script>
 function shuffleArray(originalArray) {
