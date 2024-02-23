@@ -63,7 +63,8 @@ let total = 0
 function populate() {
   document.querySelector(`.answer`).innerHTML = ''
   if(shuffled.length < 2) {
-    shuffled = shuffleArray(list)
+    shuffled = shuffleArray(list).concat(shuffled)
+
   }
   current = [shuffled.pop(), shuffled.pop()]
   replaceContent("p1", current[0])
