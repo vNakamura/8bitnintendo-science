@@ -37,7 +37,7 @@ robots: noindex
     {% if wiki_data and licensed %}
       {% assign remaining_l = remaining_l | where_exp: "game", "game.title != wiki_data.title" %}
     {% endif %}
-    {% if wiki_data %}
+    {% if wiki_data and licensed == false %}
       {% assign remaining_u = remaining_u | where_exp: "game", "game.title != wiki_data.title" %}
     {% endif %}
   {% endfor %}
