@@ -39,6 +39,7 @@ title: 8-bit Nintendo Science
           {% assign wiki_data = site.data.licensed_games[i] %}
         {% else %}
           {% assign wiki_data = site.data.unlicensed_games[i] %}
+          {% if wiki_data %}{% assign licensed = false %}{% endif %}
         {% endif %}
       {% endif %}
 

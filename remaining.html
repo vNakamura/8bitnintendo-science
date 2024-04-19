@@ -2,8 +2,8 @@
 title: Remaining Games
 robots: noindex
 ---
-  {% assign remaining_l = site.data.licensed_games %}
-  {% assign remaining_u = site.data.unlicensed_games %}
+  {% assign remaining_l = site.data.licensed_games | where: "hidden", false %}
+  {% assign remaining_u = site.data.unlicensed_games | where: "hidden", false %}
 
   {% for item in site.data.list %}
     {% assign wiki_data = nil %}
@@ -16,6 +16,7 @@ robots: noindex
         {% assign wiki_data = site.data.licensed_games[i] %}
       {% else %}
         {% assign wiki_data = site.data.unlicensed_games[i] %}
+        {% if wiki_data %}{% assign licensed = false %}{% endif %}
       {% endif %}
     {% endif %}
 
