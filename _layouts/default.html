@@ -32,9 +32,19 @@
   <script type="text/javascript" src="assets/js/tablesort.number.min.js"></script>
   <script type="text/javascript" src="assets/js/tablesort.dotsep.min.js"></script>
   <script type="text/javascript">
-    let t = document.getElementById('ranking')
-    if (t) {
-      new Tablesort(t)
+    let the_list = document.getElementById('ranking')
+    if (the_list) {
+      new Tablesort(the_list)
+
+      let r = document.getElementById('random')
+      if (r) {
+        let arr = Array.from(the_list.querySelectorAll('tbody td.timestamp a').values())
+        let link = arr[(Math.floor(Math.random() * arr.length))].href
+
+        if (link) {
+          r.href = link
+        }
+      }
     }
   </script>
   <script type="text/javascript" src="assets/js/zoom-vanilla.js"></script>
