@@ -76,7 +76,7 @@ function populate() {
 }
 
 function replaceContent(c, game) {
-  document.querySelector(`.player.${c} .screenshot`).src = `https://wsrv.nl/?h=240&output=png&url=thumbnailpacks.libretro.com/Nintendo%20-%20Nintendo%20Entertainment%20System/Named_Snaps/${game.screenshot}`
+  document.querySelector(`.player.${c} .screenshot`).src = `https://wsrv.nl/?h=240&output=png&url=raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_Entertainment_System/refs/heads/master/Named_Snaps/${game.screenshot}`
   document.querySelector(`.player.${c} .title`).textContent = game.title
   document.querySelector(`.question .${c}`).textContent = game.title
 }
