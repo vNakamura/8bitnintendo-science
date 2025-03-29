@@ -7,7 +7,7 @@ This is a fan-maintained Jekyll site hosted on GitHub Pages that tracks Dr. Jeff
 
 Feel free to open an issue or pull request to help improve the site.
 
-The main content of this site is on [/\_data/list.csv]([/\_data/list.csv]).
+The main content of this site is on [/_data/list.csv](/_data/list.csv).
 
 | Column      | Description                                                                 |
 |-------------|-----------------------------------------------------------------------------|
