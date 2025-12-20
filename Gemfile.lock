@@ -23,6 +23,7 @@ GEM
     commonmarker (0.23.10)
     concurrent-ruby (1.2.2)
     connection_pool (2.4.1)
+    csv (3.3.5)
     dnsruby (1.70.0)
       simpleidn (~> 0.2.1)
     drb (2.2.0)
@@ -268,11 +269,12 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  csv
   github-pages (~> 228)
   webrick (~> 1.8)
 
 RUBY VERSION
-   ruby 3.1.3p185
+   ruby 3.4.8p72
 
 BUNDLED WITH
    2.4.22
