@@ -43,7 +43,8 @@ robots: noindex
     {% endif %}
   {% endfor %}
 
-  <h1>Games Pending Scientific Analysis</h1>
+
+  <h1>{{ remaining_l.size | plus: remaining_u.size }} Games Pending Scientific Analysis</h1>
 
   <h2>Licensed Games</h2>
   <table border="1">
