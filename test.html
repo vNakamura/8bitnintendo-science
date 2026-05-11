@@ -71,6 +71,37 @@ function populate() {
   updateScore()
 }
 
+function getAnswerMsg(game1, game2) {
+  let game1string = '<b>' + game1.title + '</b> (#' + game1.rank + ')'
+  let game2string = '<b>' + game2.title + '</b> (#' + game2.rank + ')'
+  let better = ''
+  let worse = ''
+
+  if (game1.rank < game2.rank) {
+    better = game1string
+    worse = game2string
+  } else {
+    better = game2string
+    worse = game1string
+  }
+
+  let responses = [
+    better + ' is better than ' + worse,
+    better + ' is a better NES game than ' + worse,
+    better + ' is a better game than ' + worse,
+    better + ' is a more impressive achievement overall than ' + worse,
+    better + '? It\'s better than ' + worse,
+    worse + ' is no ' + better,
+    worse + ' is worse than ' + better,
+    worse + '? You\'d be better off with a copy of ' + better,
+    worse + '? ' + better + ' is a better game.',
+    worse + '? ' + better + ' is a superior product.',
+    worse + '? It\'s no ' + better,
+  ]
+
+  return responses[Math.floor(Math.random() * responses.length)]
+}
+
 function replaceContent(c, game) {
   document.querySelector(`.player.${c} .screenshot`).src = `https://wsrv.nl/?h=240&output=png&url=raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_Entertainment_System/refs/heads/master/Named_Snaps/${game.screenshot}`
   document.querySelector(`.player.${c} .title`).textContent = game.title
@@ -80,9 +111,7 @@ function replaceContent(c, game) {
 function selected(p) {
   const correct = current[p].rank < current[1-p].rank
   const h2Content = correct ? 'Correct' : "Wrong"
-  const pContent = `<b>${current[0].title}</b> (#${current[0].rank}) ${
-    current[0].rank < current[1].rank ? "is better than" : "is no"
-  } <b>${current[1].title}</b> (#${current[1].rank}).`
+  pContent = getAnswerMsg(current[0], current[1])
   document.querySelector(`.question`).classList.add(`hidden`)
   document.querySelector(`.answer`).innerHTML = `
     <h2 class="${h2Content.toLowerCase()}">${h2Content}!</h2>
