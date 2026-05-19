@@ -114,7 +114,9 @@ title: 8-bit Nintendo Science
           {% endif %}
         </td>
         <td class="license" data-sort="{{ licensed | to_integer }}.{{ forloop.index }}">
-          {% if licensed %}
+          {% if dev == "Panesian" %}
+            <img class="seal" src="assets/images/warren.png">
+          {% elsif licensed %}
             <img class="seal" src="assets/images/licensed.png">
           {% endif %}
         </td>
