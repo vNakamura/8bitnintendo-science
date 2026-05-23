@@ -65,7 +65,7 @@ robots: noindex
       </tr>
     {% endfor %}
   </table>
-
+  {% if remaining_u.size > 0 %}
   <h2>Unlicensed Games</h2>
   <table border="1">
     <thead>
@@ -83,3 +83,4 @@ robots: noindex
       </tr>
     {% endfor %}
   </table>
+  {% endif %}
