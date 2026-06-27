@@ -1,0 +1,66 @@
+---
+title: Nintendo 64 temporary page
+---
+
+<section class="about">
+  <p>
+    A proper new site is in development for the Nintendo 64. In the meantime, this page will serve as a temporary placeholder for the ranking list.
+  </p>
+</section>
+
+<section class="the-list">
+  <table id="ranking" border="1">
+    <thead>
+      <tr>
+        <th class="rank" data-sort-method='number' data-sort-default>#</th>
+        <th class="title">Game</th>
+        <th class="ep" data-sort-method='dotsep'>Ep<span>isode</span></th>
+        <th class="timestamp" data-sort-method='dotsep'>Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in site.data.n64 %}
+
+      <tr>
+        <td class="rank" data-sort="{{ forloop.index }}">
+          {% if forloop.index == 1 %}
+            <img class="medal" src="/assets/images/gold.gif">
+          {% elsif forloop.index == 2 %}
+            <img class="medal" src="/assets/images/silver.gif">
+          {% elsif forloop.index == 3 %}
+            <img class="medal" src="/assets/images/bronze.gif">
+          {% else %}
+            {{ forloop.index }}
+          {% endif %}
+        </td>
+        <td class="title">
+          <div class="title-wrapper">
+            <div class="name" title="{{ item.game }}">
+              {{ item.game }}
+            </div>
+          </div>
+        </td>
+        <td class="ep" data-sort="{{ item.ep }}.0.{{ forloop.index }}">
+          {% if item.ytid %}
+            <a href="https://www.youtube.com/watch?v={{ item.ytid }}">
+              <img class="thumbnail"  loading="lazy"
+                src="https://wsrv.nl/?url=i.ytimg.com/vi/{{ item.ytid }}/default.jpg"
+              >{{ item.ep | replace: ".", "-" }}
+            </a>
+          {% else %}
+            {{ item.ep | replace: ".", "-" }}
+          {% endif %}
+        </td>
+        <td class="timestamp" data-sort="{{ item.ep }}.0.{{ item.seconds }}">
+          {% if item.ytid and item.seconds %}
+            <a href="https://www.youtube.com/watch?v={{ item.ytid }}&t={{ item.seconds }}s">
+              {{ item.seconds | date: "%H:%M:%S"}}
+            </a>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+
