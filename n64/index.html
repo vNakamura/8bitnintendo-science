@@ -12,27 +12,36 @@ title: Nintendo 64 temporary page
   <table id="ranking" border="1">
     <thead>
       <tr>
-        <th class="rank" data-sort-method='number' data-sort-default>#</th>
+        <th class="rank" data-sort-method='dotstep' data-sort-default>#</th>
         <th class="title">Game</th>
+        <th class="year" data-sort-method='dotsep'>Release</th>
         <th class="ep" data-sort-method='dotsep'>Ep<span>isode</span></th>
         <th class="timestamp" data-sort-method='dotsep'>Time</th>
       </tr>
     </thead>
     <tbody>
       {% for item in site.data.n64 %}
+      {% assign unranked = false %}
 
-      <tr>
-        <td class="rank" data-sort="{{ forloop.index }}">
-          {% if forloop.index == 1 %}
+      {% comment %}
+      {% if item.rank == '' and unranked == false %}
+        {% continue %}
+      {% endif %}
+      {% endcomment %}
+
+      <tr {% if item.rank == null %}style="display:none"{% endif %}>
+        <td class="rank" data-sort="{{ item.rank }}">
+          {% if item.rank == "1" %}
             <img class="medal" src="/assets/images/gold.gif">
-          {% elsif forloop.index == 2 %}
+          {% elsif item.rank == "2" %}
             <img class="medal" src="/assets/images/silver.gif">
-          {% elsif forloop.index == 3 %}
+          {% elsif item.rank == "3" %}
             <img class="medal" src="/assets/images/bronze.gif">
           {% else %}
-            {{ forloop.index }}
+            {{ item.rank }}
           {% endif %}
         </td>
+
         <td class="title">
           <div class="title-wrapper">
             <div class="name" title="{{ item.game }}">
@@ -40,6 +49,11 @@ title: Nintendo 64 temporary page
             </div>
           </div>
         </td>
+
+        <td class="year">
+          {{ item.release }}
+        </td>
+
         <td class="ep" data-sort="{{ item.ep }}.0.{{ forloop.index }}">
           {% if item.ytid %}
             <a href="https://www.youtube.com/watch?v={{ item.ytid }}">

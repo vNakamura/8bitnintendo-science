@@ -8,4 +8,3 @@ defaults:
     values:
       layout: default
       robots: index
-timezone: UTC
